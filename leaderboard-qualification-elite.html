@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>DNS LIVE STANDINGS</title>
 
@@ -12,347 +15,264 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
 
-    background:transparent;
-
-    overflow:hidden;
-
-    font-family:'Orbitron',sans-serif;
-
-    padding:8px;
-
-    color:white;
+background:transparent;
+overflow:hidden;
+font-family:'Orbitron',sans-serif;
+padding:8px;
+color:white;
 }
 
 /* =========================================================
-   BOARD
+BOARD
 ========================================================= */
 
 .board{
 
-    width:max-content;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:4px;
+width:max-content;
+display:flex;
+flex-direction:column;
+gap:4px;
 }
 
 /* =========================================================
-   HEADER
+HEADER
 ========================================================= */
 
 .header{
 
-    width:100%;
+width:100%;
 
-    background:
-    linear-gradient(
-    180deg,
-    rgba(20,20,20,0.98),
-    rgba(5,5,5,0.98));
+background:
+linear-gradient(
+180deg,
+rgba(20,20,20,0.98),
+rgba(5,5,5,0.98));
 
-    border-radius:8px;
+border-radius:8px;
 
-    padding:12px;
+padding:12px;
 
-    border-top:
-    1px solid rgba(255,255,255,0.08);
+border-top:
+1px solid rgba(255,255,255,0.08);
 
-    border-bottom:
-    3px solid rgba(130,0,0,0.85);
+border-bottom:
+3px solid rgba(130,0,0,0.85);
 
-    box-shadow:
-    0 8px 18px rgba(0,0,0,0.35);
+box-shadow:
+0 8px 18px rgba(0,0,0,0.35);
 }
 
 .series{
 
-    text-align:center;
+text-align:center;
 
-    font-size:1.15rem;
+font-size:1.15rem;
 
-    font-weight:900;
+font-weight:900;
 
-    letter-spacing:1px;
+letter-spacing:1px;
 
-    text-transform:uppercase;
+text-transform:uppercase;
 
-    color:white;
+color:white;
 
-    text-shadow:
-    0 0 8px rgba(255,0,0,0.45);
+text-shadow:
+0 0 8px rgba(255,0,0,0.45);
 }
 
 .sheetname{
 
-    text-align:center;
+text-align:center;
 
-    font-size:0.45rem;
+font-size:0.45rem;
 
-    letter-spacing:2px;
+letter-spacing:2px;
 
-    margin-top:4px;
+margin-top:4px;
 
-    opacity:0.9;
+opacity:0.9;
 
-    text-transform:uppercase;
+text-transform:uppercase;
 }
 
 /* =========================================================
-   TABLE
+TABLE
 ========================================================= */
 
 .table-header,
 .row{
 
-    display:grid;
+display:grid;
 
-    gap:3px;
+gap:3px;
 
-    align-items:center;
+align-items:center;
 }
 
 /* =========================================================
-   HEADER CELL
+HEADER CELL
 ========================================================= */
 
 .header-cell{
 
-    height:26px;
+height:26px;
 
-    background:
-    linear-gradient(
-    180deg,
-    rgba(40,40,40,0.96),
-    rgba(10,10,10,0.96));
+background:
+linear-gradient(
+180deg,
+rgba(40,40,40,0.96),
+rgba(10,10,10,0.96));
 
-    border-radius:4px;
+border-radius:4px;
 
-    color:white;
+color:white;
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+align-items:center;
 
-    justify-content:center;
+justify-content:center;
 
-    font-size:0.42rem;
+font-size:0.42rem;
 
-    font-weight:900;
+font-weight:900;
 
-    letter-spacing:0.5px;
+letter-spacing:0.5px;
 
-    border-bottom:
-    2px solid rgba(140,0,0,0.75);
+border-bottom:
+2px solid rgba(140,0,0,0.75);
 
-    padding:0 8px;
+padding:0 8px;
 }
 
 /* =========================================================
-   ROW
+ROW
 ========================================================= */
 
 .row{
 
-    height:38px;
+height:38px;
 
-    transition:
-    transform 1s cubic-bezier(.22,1,.36,1);
+transition:
+transform 1s cubic-bezier(.22,1,.36,1);
 }
 
 /* =========================================================
-   CELL
+CELL
 ========================================================= */
 
 .cell{
 
-    height:100%;
+height:100%;
 
-    background:
-    linear-gradient(
-    180deg,
-    rgba(38,38,38,0.97),
-    rgba(10,10,10,0.97));
+background:
+linear-gradient(
+180deg,
+rgba(38,38,38,0.97),
+rgba(10,10,10,0.97));
 
-    border-radius:4px;
+border-radius:4px;
 
-    color:white;
+color:white;
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+align-items:center;
 
-    justify-content:center;
+justify-content:center;
 
-    font-size:calc(0.58rem * 1.3);
+font-size:calc(0.58rem * 1.3);
 
-    font-weight:800;
+font-weight:800;
 
-    border-top:
-    1px solid rgba(255,255,255,0.08);
+border-top:
+1px solid rgba(255,255,255,0.08);
 
-    border-bottom:
-    2px solid rgba(100,0,0,0.85);
+border-bottom:
+2px solid rgba(100,0,0,0.85);
 
-    box-shadow:
-    0 3px 8px rgba(0,0,0,0.28);
+box-shadow:
+0 3px 8px rgba(0,0,0,0.28);
 
-    overflow:hidden;
+overflow:hidden;
 
-    padding:0 8px;
+padding:0 8px;
 
-    white-space:nowrap;
+white-space:nowrap;
 }
 
 /* =========================================================
-   DRIVER
+DRIVER
 ========================================================= */
 
 .driver{
 
-    justify-content:flex-start;
+justify-content:flex-start;
 
-    padding:0 10px;
+padding:0 10px;
 
-    background:
-    linear-gradient(
-    90deg,
-    rgba(120,0,0,0.98),
-    rgba(28,28,28,0.98));
+background:
+linear-gradient(
+90deg,
+rgba(120,0,0,0.98),
+rgba(28,28,28,0.98));
 
-    font-size:calc(0.62rem * 1.3);
+font-size:calc(0.62rem * 1.3);
 
-    font-weight:900;
+font-weight:900;
 
-    letter-spacing:0.3px;
+letter-spacing:0.3px;
 }
 
 /* =========================================================
-   TOTAL
+TOTAL
 ========================================================= */
 
 .total{
 
-    font-size:calc(0.68rem * 1.3);
+font-size:calc(0.68rem * 1.3);
 
-    font-weight:900;
+font-weight:900;
 
-    color:#ff3b3b;
+color:#ff3b3b;
 }
 
 /* =========================================================
-   PODIUM
+PODIUM
 ========================================================= */
 
 .gold .driver{
 
-    background:
-    linear-gradient(
-    90deg,
-    rgba(170,120,0,0.95),
-    rgba(28,28,28,0.95));
+background:
+linear-gradient(
+90deg,
+rgba(170,120,0,0.95),
+rgba(28,28,28,0.95));
 }
 
 .silver .driver{
 
-    background:
-    linear-gradient(
-    90deg,
-    rgba(120,120,120,0.95),
-    rgba(28,28,28,0.95));
+background:
+linear-gradient(
+90deg,
+rgba(120,120,120,0.95),
+rgba(28,28,28,0.95));
 }
 
 .bronze .driver{
 
-    background:
-    linear-gradient(
-    90deg,
-    rgba(120,60,20,0.95),
-    rgba(28,28,28,0.95));
-}
-
-/* =========================================================
-   MOVE UP
-========================================================= */
-
-.move-up{
-
-    animation:
-    moveUp 3.0s cubic-bezier(.22,1,.36,1);
-}
-
-@keyframes moveUp{
-
-    0%{
-
-        transform:
-        translateX(-60px)
-        translateY(60px);
-
-        opacity:0.2;
-    }
-
-    40%{
-
-        transform:
-        translateX(10px)
-        translateY(-10px);
-
-        opacity:1;
-    }
-
-    100%{
-
-        transform:
-        translateX(0)
-        translateY(0);
-    }
-}
-
-/* =========================================================
-   MOVE DOWN
-========================================================= */
-
-.move-down{
-
-    animation:
-    moveDown 3.0s cubic-bezier(.22,1,.36,1);
-}
-
-@keyframes moveDown{
-
-    0%{
-
-        transform:
-        translateX(-60px)
-        translateY(-60px);
-
-        opacity:0.2;
-    }
-
-    40%{
-
-        transform:
-        translateX(10px)
-        translateY(10px);
-
-        opacity:1;
-    }
-
-    100%{
-
-        transform:
-        translateX(0)
-        translateY(0);
-    }
+background:
+linear-gradient(
+90deg,
+rgba(120,60,20,0.95),
+rgba(28,28,28,0.95));
 }
 
 </style>
@@ -363,359 +283,411 @@ body{
 
 <div class="board">
 
-    <div class="header">
+<div class="header">
 
-        <div class="series">
-            DRIFT NATIONAL SERIES
-        </div>
+<div class="series">
+DRIFT NATIONAL SERIES
+</div>
 
-        <div class="sheetname">
-            ELITE QUALIFICATION RANKINGS
-        </div>
+<div class="sheetname">
+ELITE QUALIFICATION RANKINGS
+</div>
 
-    </div>
+</div>
 
-    <!-- TABLE HEADER -->
+<div class="table-header" id="tableHeader">
 
-    <div class="table-header" id="tableHeader">
+<div class="header-cell">P</div>
 
-        <div class="header-cell">P</div>
+<div class="header-cell">#</div>
 
-        <div class="header-cell">#</div>
+<div class="header-cell">DRIVER</div>
 
-        <div class="header-cell">DRIVER</div>
+<div class="header-cell">BEST</div>
 
-        <div class="header-cell">BEST</div>
+<div class="header-cell">LINE</div>
 
-        <div class="header-cell">LINE</div>
+<div class="header-cell">ANG</div>
 
-        <div class="header-cell">ANG</div>
+<div class="header-cell">STYLE</div>
 
-        <div class="header-cell">STYLE</div>
+<div class="header-cell">TOT</div>
 
-        <div class="header-cell">TOT</div>
+</div>
 
-    </div>
-
-    <!-- LEADERBOARD -->
-
-    <div id="leaderboard"></div>
+<div id="leaderboard"></div>
 
 </div>
 
 <script>
 
 const csvUrl =
-'https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGydE2Pe8jwdQJ6V0ucfb6dUvq_-YpzWAmIM4iBJ7nh_qM7UFqx8yZWDz_zX0s10104pnSPdgKf62/pub?gid=1402080799&single=true&output=csv';
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGydE2Pe8jwdQJ6V0ucfb6dUvq_-YpzWAmIM4iBJ7nh_qM7UFqx8yZWDz_zX0s10104pnSPdgKf62/pub?output=csv&gid=1402080799';
 
 let previousPositions = {};
 
-/* =========================================================
-   TEXT WIDTH
-========================================================= */
-
 function getTextWidth(text,size='0.75rem',weight='800'){
 
-    const temp =
-    document.createElement('span');
+const temp =
+document.createElement('span');
 
-    temp.style.fontFamily =
-    'Orbitron';
+temp.style.fontFamily =
+'Orbitron';
 
-    temp.style.fontSize =
-    size;
+temp.style.fontSize =
+size;
 
-    temp.style.fontWeight =
-    weight;
+temp.style.fontWeight =
+weight;
 
-    temp.style.position =
-    'absolute';
+temp.style.position =
+'absolute';
 
-    temp.style.visibility =
-    'hidden';
+temp.style.visibility =
+'hidden';
 
-    temp.style.whiteSpace =
-    'nowrap';
+temp.style.whiteSpace =
+'nowrap';
 
-    temp.innerText =
-    text;
+temp.innerText =
+text;
 
-    document.body.appendChild(temp);
+document.body.appendChild(temp);
 
-    const width =
-    Math.ceil(
-    temp.getBoundingClientRect().width
-    );
+const width =
+Math.ceil(
+temp.getBoundingClientRect().width
+);
 
-    temp.remove();
+temp.remove();
 
-    return width;
+return width;
 }
-
-/* =========================================================
-   CSV PARSER
-========================================================= */
 
 function parseCSVLine(line){
 
-    const result = [];
-    let current = '';
-    let insideQuotes = false;
+const result = [];
 
-    for(let i = 0; i < line.length; i++){
+let current = '';
 
-        const char = line[i];
+let insideQuotes = false;
 
-        if(char === '"'){
+for(let i=0;i<line.length;i++){
 
-            insideQuotes = !insideQuotes;
+const char = line[i];
 
-        }else if(char === ',' && !insideQuotes){
+if(char === '"'){
 
-            result.push(current.trim());
+insideQuotes = !insideQuotes;
 
-            current = '';
+}else if(
+char === ',' &&
+!insideQuotes
+){
 
-        }else{
+result.push(
+current.trim()
+);
 
-            current += char;
-        }
-    }
+current='';
 
-    result.push(current.trim());
+}else{
 
-    return result;
+current += char;
+}
 }
 
-/* =========================================================
-   LOAD DATA
-========================================================= */
+result.push(
+current.trim()
+);
+
+return result;
+}
 
 async function loadLeaderboard(){
 
-    try{
+try{
 
-        const response =
-        await fetch(csvUrl);
+const response =
+await fetch(
 
-        const csv =
-        await response.text();
+csvUrl + '&cache=' + Date.now(),
 
-        const rows =
-        csv.split('\n');
+{
+cache:'no-store'
+}
 
-        rows.shift();
-        rows.shift();
+);
 
-        let drivers = [];
+const csv =
+await response.text();
 
-        rows.forEach((row)=>{
+const rows =
+csv.split('\n');
 
-            if(!row.trim()) return;
+rows.shift();
+rows.shift();
 
-            const cols =
-            parseCSVLine(row);
+let drivers = [];
 
-            drivers.push({
+rows.forEach((row)=>{
 
-                number: cols[1] || '',
-                surname: cols[2] || '',
-                name: cols[3] || '',
-                bestRun: cols[4] || '',
-                lineScore: cols[5] || '',
-                angle: cols[6] || '',
-                style: cols[7] || '',
-                total: cols[8] || ''
+if(!row.trim()) return;
 
-            });
+const cols =
+parseCSVLine(row);
 
-        });
+drivers.push({
 
-        drivers.sort((a,b)=>
-        parseFloat(b.total) -
-        parseFloat(a.total));
+number:
+cols[1] || '',
 
-        /* =========================================
-           AUTO COLUMN WIDTHS
-        ========================================= */
+surname:
+cols[2] || '',
 
-        let longestDriver = '';
-        let longestBest = '';
-        let longestLine = '';
-        let longestAngle = '';
-        let longestStyle = '';
-        let longestTotal = '';
-        let longestNumber = '';
+name:
+cols[3] || '',
 
-        drivers.forEach(driver=>{
+bestRun:
+cols[4] || '',
 
-            const driverName =
-            `${driver.surname} ${driver.name ? driver.name.charAt(0)+'.' : ''}`;
+lineScore:
+cols[5] || '',
 
-            if(driverName.length > longestDriver.length)
-            longestDriver = driverName;
+angle:
+cols[6] || '',
 
-            if(driver.bestRun.length > longestBest.length)
-            longestBest = driver.bestRun;
+style:
+cols[7] || '',
 
-            if(driver.lineScore.length > longestLine.length)
-            longestLine = driver.lineScore;
+total:
+cols[8] || ''
 
-            if(driver.angle.length > longestAngle.length)
-            longestAngle = driver.angle;
+});
 
-            if(driver.style.length > longestStyle.length)
-            longestStyle = driver.style;
+});
 
-            if(driver.total.length > longestTotal.length)
-            longestTotal = driver.total;
+drivers.sort((a,b)=>
+parseFloat(b.total) -
+parseFloat(a.total)
+);
 
-            if(driver.number.length > longestNumber.length)
-            longestNumber = driver.number;
-        });
+let longestDriver='';
+let longestBest='';
+let longestLine='';
+let longestAngle='';
+let longestStyle='';
+let longestTotal='';
+let longestNumber='';
 
-        const posWidth = 34;
+drivers.forEach(driver=>{
 
-        const numberWidth =
-        getTextWidth(longestNumber,'0.75rem','800') + 18;
+const driverName =
+`${driver.surname} ${
+driver.name
+? driver.name.charAt(0)+'.'
+: ''
+}`;
 
-        const driverWidth =
-        getTextWidth(longestDriver,'0.82rem','900') + 24;
+if(driverName.length >
+longestDriver.length)
+longestDriver = driverName;
 
-        const bestWidth =
-        getTextWidth(longestBest,'0.75rem','800') + 20;
+if(driver.bestRun.length >
+longestBest.length)
+longestBest = driver.bestRun;
 
-        const lineWidth =
-        getTextWidth(longestLine,'0.75rem','800') + 20;
+if(driver.lineScore.length >
+longestLine.length)
+longestLine = driver.lineScore;
 
-        const angleWidth =
-        getTextWidth(longestAngle,'0.75rem','800') + 20;
+if(driver.angle.length >
+longestAngle.length)
+longestAngle = driver.angle;
 
-        const styleWidth =
-        getTextWidth(longestStyle,'0.75rem','800') + 20;
+if(driver.style.length >
+longestStyle.length)
+longestStyle = driver.style;
 
-        const totalWidth =
-        getTextWidth(longestTotal,'0.9rem','900') + 22;
+if(driver.total.length >
+longestTotal.length)
+longestTotal = driver.total;
 
-        const template = `
-            ${posWidth}px
-            ${numberWidth}px
-            ${driverWidth}px
-            ${bestWidth}px
-            ${lineWidth}px
-            ${angleWidth}px
-            ${styleWidth}px
-            ${totalWidth}px
-        `;
+if(driver.number.length >
+longestNumber.length)
+longestNumber = driver.number;
 
-        document.getElementById(
-        'tableHeader').style.gridTemplateColumns =
-        template;
+});
 
-        const board =
-        document.getElementById(
-        'leaderboard');
+const template = `
 
-        board.innerHTML = '';
+34px
 
-        drivers.forEach((driver,index)=>{
+${getTextWidth(
+longestNumber,
+'0.75rem',
+'800'
+)+18}px
 
-            const driverId =
-            driver.surname + driver.number;
+${getTextWidth(
+longestDriver,
+'0.82rem',
+'900'
+)+24}px
 
-            let medal = '';
+${getTextWidth(
+longestBest,
+'0.75rem',
+'800'
+)+20}px
 
-            if(index === 0)
-            medal = 'gold';
+${getTextWidth(
+longestLine,
+'0.75rem',
+'800'
+)+20}px
 
-            if(index === 1)
-            medal = 'silver';
+${getTextWidth(
+longestAngle,
+'0.75rem',
+'800'
+)+20}px
 
-            if(index === 2)
-            medal = 'bronze';
+${getTextWidth(
+longestStyle,
+'0.75rem',
+'800'
+)+20}px
 
-            const rowDiv =
-            document.createElement('div');
+${getTextWidth(
+longestTotal,
+'0.9rem',
+'900'
+)+22}px
 
-            rowDiv.className =
-            `row ${medal}`;
+`;
 
-            rowDiv.style.gridTemplateColumns =
-            template;
+document.getElementById(
+'tableHeader'
+).style.gridTemplateColumns =
+template;
 
-            const oldPosition =
-            previousPositions[driverId];
+const board =
+document.getElementById(
+'leaderboard'
+);
 
-            if(oldPosition !== undefined){
+board.innerHTML='';
 
-                if(index < oldPosition){
+drivers.forEach((driver,index)=>{
 
-                    rowDiv.classList.add(
-                    'move-up');
-                }
+const driverId =
+driver.surname +
+driver.number;
 
-                if(index > oldPosition){
+let medal='';
 
-                    rowDiv.classList.add(
-                    'move-down');
-                }
-            }
+if(index===0)
+medal='gold';
 
-            previousPositions[driverId] =
-            index;
+if(index===1)
+medal='silver';
 
-            rowDiv.innerHTML = `
+if(index===2)
+medal='bronze';
 
-                <div class="cell">
-                    ${index + 1}
-                </div>
+const rowDiv =
+document.createElement('div');
 
-                <div class="cell">
-                    ${driver.number}
-                </div>
+rowDiv.className =
+`row ${medal}`;
 
-                <div class="cell driver">
-                    ${driver.surname}
-                    ${driver.name ? driver.name.charAt(0)+'.' : ''}
-                </div>
+rowDiv.style.gridTemplateColumns =
+template;
 
-                <div class="cell">
-                    ${driver.bestRun}
-                </div>
+const oldPosition =
+previousPositions[driverId];
 
-                <div class="cell">
-                    ${driver.lineScore}
-                </div>
+if(oldPosition !== undefined){
 
-                <div class="cell">
-                    ${driver.angle}
-                </div>
+if(index < oldPosition){
 
-                <div class="cell">
-                    ${driver.style}
-                </div>
+rowDiv.classList.add(
+'move-up'
+);
 
-                <div class="cell total">
-                    ${driver.total}
-                </div>
+}
 
-            `;
+if(index > oldPosition){
 
-            board.appendChild(rowDiv);
+rowDiv.classList.add(
+'move-down'
+);
 
-        });
+}
+}
 
-    }catch(error){
+previousPositions[driverId] =
+index;
 
-        console.error(error);
-    }
+rowDiv.innerHTML = `
+
+<div class="cell">
+${index + 1}
+</div>
+
+<div class="cell">
+${driver.number}
+</div>
+
+<div class="cell driver">
+${driver.surname}
+${driver.name
+? driver.name.charAt(0)+'.'
+: ''}
+</div>
+
+<div class="cell">
+${driver.bestRun}
+</div>
+
+<div class="cell">
+${driver.lineScore}
+</div>
+
+<div class="cell">
+${driver.angle}
+</div>
+
+<div class="cell">
+${driver.style}
+</div>
+
+<div class="cell total">
+${driver.total}
+</div>
+
+`;
+
+board.appendChild(
+rowDiv
+);
+
+});
+
+}catch(error){
+
+console.log(error);
+
+}
+
 }
 
 loadLeaderboard();
 
 setInterval(
 loadLeaderboard,
-90000);
+5000);
 
 </script>
 
