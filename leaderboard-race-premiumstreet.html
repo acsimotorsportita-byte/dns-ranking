@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DNS LIVE STANDINGS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:transparent;
+
+    overflow:hidden;
+
+    font-family:'Orbitron',sans-serif;
+
+    padding:8px;
+
+    color:white;
+}
+
+/* =========================================================
+   BOARD
+========================================================= */
+
+.board{
+
+    width:max-content;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    width:100%;
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(20,20,20,0.98),
+    rgba(5,5,5,0.98));
+
+    border-radius:8px;
+
+    padding:12px;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+
+    border-bottom:
+    3px solid rgba(130,0,0,0.85);
+
+    box-shadow:
+    0 8px 18px rgba(0,0,0,0.35);
+}
+
+.series{
+
+    text-align:center;
+
+    font-size:1.15rem;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    color:white;
+
+    text-shadow:
+    0 0 8px rgba(255,0,0,0.45);
+}
+
+.sheetname{
+
+    text-align:center;
+
+    font-size:0.45rem;
+
+    letter-spacing:2px;
+
+    margin-top:4px;
+
+    opacity:0.9;
+
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-header,
+.row{
+
+    display:grid;
+
+    gap:3px;
+
+    align-items:center;
+}
+
+/* =========================================================
+   HEADER CELL
+========================================================= */
+
+.header-cell{
+
+    height:26px;
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(40,40,40,0.96),
+    rgba(10,10,10,0.96));
+
+    border-radius:4px;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:0.42rem;
+
+    font-weight:900;
+
+    letter-spacing:0.5px;
+
+    border-bottom:
+    2px solid rgba(140,0,0,0.75);
+
+    padding:0 8px;
+}
+
+/* =========================================================
+   ROW
+========================================================= */
+
+.row{
+
+    height:38px;
+
+    transition:
+    transform 1s cubic-bezier(.22,1,.36,1);
+}
+
+/* =========================================================
+   CELL
+========================================================= */
+
+.cell{
+
+    height:100%;
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(38,38,38,0.97),
+    rgba(10,10,10,0.97));
+
+    border-radius:4px;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:calc(0.58rem * 1.3);
+
+    font-weight:800;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+
+    border-bottom:
+    2px solid rgba(100,0,0,0.85);
+
+    box-shadow:
+    0 3px 8px rgba(0,0,0,0.28);
+
+    overflow:hidden;
+
+    padding:0 8px;
+
+    white-space:nowrap;
+}
+
+/* =========================================================
+   DRIVER
+========================================================= */
+
+.driver{
+
+    justify-content:flex-start;
+
+    padding:0 10px;
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(120,0,0,0.98),
+    rgba(28,28,28,0.98));
+
+    font-size:calc(0.62rem * 1.3);
+
+    font-weight:900;
+
+    letter-spacing:0.3px;
+}
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.total{
+
+    font-size:calc(0.68rem * 1.3);
+
+    font-weight:900;
+
+    color:#ff3b3b;
+}
+
+/* =========================================================
+   PODIUM
+========================================================= */
+
+.gold .driver{
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(170,120,0,0.95),
+    rgba(28,28,28,0.95));
+}
+
+.silver .driver{
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(120,120,120,0.95),
+    rgba(28,28,28,0.95));
+}
+
+.bronze .driver{
+
+    background:
+    linear-gradient(
+    90deg,
+    rgba(120,60,20,0.95),
+    rgba(28,28,28,0.95));
+}
+
+/* =========================================================
+   MOVE UP
+========================================================= */
+
+.move-up{
+
+    animation:
+    moveUp 3.0s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes moveUp{
+
+    0%{
+
+        transform:
+        translateX(-60px)
+        translateY(60px);
+
+        opacity:0.2;
+    }
+
+    40%{
+
+        transform:
+        translateX(10px)
+        translateY(-10px);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+        translateX(0)
+        translateY(0);
+    }
+}
+
+/* =========================================================
+   MOVE DOWN
+========================================================= */
+
+.move-down{
+
+    animation:
+    moveDown 3.0s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes moveDown{
+
+    0%{
+
+        transform:
+        translateX(-60px)
+        translateY(-60px);
+
+        opacity:0.2;
+    }
+
+    40%{
+
+        transform:
+        translateX(10px)
+        translateY(10px);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+        translateX(0)
+        translateY(0);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="board">
+
+    <div class="header">
+
+        <div class="series">
+            DRIFT NATIONAL SERIES
+        </div>
+
+        <div class="sheetname">
+            PREMIUM STREET RACE RANKINGS
+        </div>
+
+    </div>
+
+    <!-- TABLE HEADER -->
+
+    <div class="table-header" id="tableHeader">
+
+        <div class="header-cell">P</div>
+
+        <div class="header-cell">#</div>
+
+        <div class="header-cell">DRIVER</div>
+
+        <div class="header-cell">BEST</div>
+
+        <div class="header-cell">LINE</div>
+
+        <div class="header-cell">ANG</div>
+
+        <div class="header-cell">STYLE</div>
+
+        <div class="header-cell">TOT</div>
+
+    </div>
+
+    <!-- LEADERBOARD -->
+
+    <div id="leaderboard"></div>
+
+</div>
+
+<script>
+
+const csvUrl =
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGydE2Pe8jwdQJ6V0ucfb6dUvq_-YpzWAmIM4iBJ7nh_qM7UFqx8yZWDz_zX0s10104pnSPdgKf62/pub?gid=609113927&single=true&output=csv';
+
+let previousPositions = {};
+
+/* =========================================================
+   TEXT WIDTH
+========================================================= */
+
+function getTextWidth(text,size='0.75rem',weight='800'){
+
+    const temp =
+    document.createElement('span');
+
+    temp.style.fontFamily =
+    'Orbitron';
+
+    temp.style.fontSize =
+    size;
+
+    temp.style.fontWeight =
+    weight;
+
+    temp.style.position =
+    'absolute';
+
+    temp.style.visibility =
+    'hidden';
+
+    temp.style.whiteSpace =
+    'nowrap';
+
+    temp.innerText =
+    text;
+
+    document.body.appendChild(temp);
+
+    const width =
+    Math.ceil(
+    temp.getBoundingClientRect().width
+    );
+
+    temp.remove();
+
+    return width;
+}
+
+/* =========================================================
+   CSV PARSER
+========================================================= */
+
+function parseCSVLine(line){
+
+    const result = [];
+    let current = '';
+    let insideQuotes = false;
+
+    for(let i = 0; i < line.length; i++){
+
+        const char = line[i];
+
+        if(char === '"'){
+
+            insideQuotes = !insideQuotes;
+
+        }else if(char === ',' && !insideQuotes){
+
+            result.push(current.trim());
+
+            current = '';
+
+        }else{
+
+            current += char;
+        }
+    }
+
+    result.push(current.trim());
+
+    return result;
+}
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+async function loadLeaderboard(){
+
+    try{
+
+        const response =
+        await fetch(csvUrl);
+
+        const csv =
+        await response.text();
+
+        const rows =
+        csv.split('\n');
+
+        rows.shift();
+        rows.shift();
+
+        let drivers = [];
+
+        rows.forEach((row)=>{
+
+            if(!row.trim()) return;
+
+            const cols =
+            parseCSVLine(row);
+
+            drivers.push({
+
+                number: cols[1] || '',
+                surname: cols[2] || '',
+                name: cols[3] || '',
+                bestRun: cols[4] || '',
+                lineScore: cols[5] || '',
+                angle: cols[6] || '',
+                style: cols[7] || '',
+                total: cols[8] || ''
+
+            });
+
+        });
+
+        drivers.sort((a,b)=>
+        parseFloat(b.total) -
+        parseFloat(a.total));
+
+        /* =========================================
+           AUTO COLUMN WIDTHS
+        ========================================= */
+
+        let longestDriver = '';
+        let longestBest = '';
+        let longestLine = '';
+        let longestAngle = '';
+        let longestStyle = '';
+        let longestTotal = '';
+        let longestNumber = '';
+
+        drivers.forEach(driver=>{
+
+            const driverName =
+            `${driver.surname} ${driver.name ? driver.name.charAt(0)+'.' : ''}`;
+
+            if(driverName.length > longestDriver.length)
+            longestDriver = driverName;
+
+            if(driver.bestRun.length > longestBest.length)
+            longestBest = driver.bestRun;
+
+            if(driver.lineScore.length > longestLine.length)
+            longestLine = driver.lineScore;
+
+            if(driver.angle.length > longestAngle.length)
+            longestAngle = driver.angle;
+
+            if(driver.style.length > longestStyle.length)
+            longestStyle = driver.style;
+
+            if(driver.total.length > longestTotal.length)
+            longestTotal = driver.total;
+
+            if(driver.number.length > longestNumber.length)
+            longestNumber = driver.number;
+        });
+
+        const posWidth = 34;
+
+        const numberWidth =
+        getTextWidth(longestNumber,'0.75rem','800') + 18;
+
+        const driverWidth =
+        getTextWidth(longestDriver,'0.82rem','900') + 24;
+
+        const bestWidth =
+        getTextWidth(longestBest,'0.75rem','800') + 20;
+
+        const lineWidth =
+        getTextWidth(longestLine,'0.75rem','800') + 20;
+
+        const angleWidth =
+        getTextWidth(longestAngle,'0.75rem','800') + 20;
+
+        const styleWidth =
+        getTextWidth(longestStyle,'0.75rem','800') + 20;
+
+        const totalWidth =
+        getTextWidth(longestTotal,'0.9rem','900') + 22;
+
+        const template = `
+            ${posWidth}px
+            ${numberWidth}px
+            ${driverWidth}px
+            ${bestWidth}px
+            ${lineWidth}px
+            ${angleWidth}px
+            ${styleWidth}px
+            ${totalWidth}px
+        `;
+
+        document.getElementById(
+        'tableHeader').style.gridTemplateColumns =
+        template;
+
+        const board =
+        document.getElementById(
+        'leaderboard');
+
+        board.innerHTML = '';
+
+        drivers.forEach((driver,index)=>{
+
+            const driverId =
+            driver.surname + driver.number;
+
+            let medal = '';
+
+            if(index === 0)
+            medal = 'gold';
+
+            if(index === 1)
+            medal = 'silver';
+
+            if(index === 2)
+            medal = 'bronze';
+
+            const rowDiv =
+            document.createElement('div');
+
+            rowDiv.className =
+            `row ${medal}`;
+
+            rowDiv.style.gridTemplateColumns =
+            template;
+
+            const oldPosition =
+            previousPositions[driverId];
+
+            if(oldPosition !== undefined){
+
+                if(index < oldPosition){
+
+                    rowDiv.classList.add(
+                    'move-up');
+                }
+
+                if(index > oldPosition){
+
+                    rowDiv.classList.add(
+                    'move-down');
+                }
+            }
+
+            previousPositions[driverId] =
+            index;
+
+            rowDiv.innerHTML = `
+
+                <div class="cell">
+                    ${index + 1}
+                </div>
+
+                <div class="cell">
+                    ${driver.number}
+                </div>
+
+                <div class="cell driver">
+                    ${driver.surname}
+                    ${driver.name ? driver.name.charAt(0)+'.' : ''}
+                </div>
+
+                <div class="cell">
+                    ${driver.bestRun}
+                </div>
+
+                <div class="cell">
+                    ${driver.lineScore}
+                </div>
+
+                <div class="cell">
+                    ${driver.angle}
+                </div>
+
+                <div class="cell">
+                    ${driver.style}
+                </div>
+
+                <div class="cell total">
+                    ${driver.total}
+                </div>
+
+            `;
+
+            board.appendChild(rowDiv);
+
+        });
+
+    }catch(error){
+
+        console.error(error);
+    }
+}
+
+loadLeaderboard();
+
+setInterval(
+loadLeaderboard,
+90000);
+
+</script>
+
+</body>
+</html>
