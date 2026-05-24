@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DRIFT NATIONAL SERIES - TOP 32 ELITE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+RESET
+========================================================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+/* =========================================================
+BODY
+========================================================= */
+
+body{
+
+width:1920px;
+height:1080px;
+
+overflow:hidden;
+
+font-family:'Orbitron',sans-serif;
+
+position:relative;
+
+color:white;
+
+background:
+
+radial-gradient(
+circle at top left,
+rgba(255,0,0,.16) 0%,
+transparent 30%
+),
+
+radial-gradient(
+circle at bottom right,
+rgba(255,255,255,.05) 0%,
+transparent 25%
+),
+
+linear-gradient(
+45deg,
+rgba(255,255,255,.025) 25%,
+transparent 25%,
+transparent 50%,
+rgba(255,255,255,.025) 50%,
+rgba(255,255,255,.025) 75%,
+transparent 75%,
+transparent
+),
+
+linear-gradient(
+-45deg,
+rgba(255,255,255,.018) 25%,
+transparent 25%,
+transparent 50%,
+rgba(255,255,255,.018) 50%,
+rgba(255,255,255,.018) 75%,
+transparent 75%,
+transparent
+),
+
+linear-gradient(
+180deg,
+rgba(10,10,10,0.2) 0%,
+rgba(0,0,0,0.2) 100%
+);
+
+background-size:
+100% 100%,
+100% 100%,
+14px 14px,
+14px 14px,
+100% 100%;
+
+background-color:rgba(0,0,0,0.8);
+
+}
+
+/* =========================================================
+OVERLAY
+========================================================= */
+
+body::before{
+
+content:'';
+
+position:absolute;
+
+inset:0;
+
+background:
+
+linear-gradient(
+90deg,
+transparent 0%,
+rgba(255,255,255,.025) 50%,
+transparent 100%
+),
+
+linear-gradient(
+180deg,
+rgba(255,0,0,.04),
+transparent 45%
+);
+
+mix-blend-mode:screen;
+
+pointer-events:none;
+
+animation:bgPulse 6s ease-in-out infinite;
+
+}
+
+/* =========================================================
+ANIMATIONS
+========================================================= */
+
+@keyframes bgPulse{
+
+0%{
+opacity:.7;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+opacity:.7;
+}
+
+}
+
+@keyframes titleGlow{
+
+0%{
+text-shadow:
+0 0 10px rgba(255,0,0,.20),
+0 0 25px rgba(255,255,255,.05);
+}
+
+50%{
+text-shadow:
+0 0 18px rgba(255,0,0,.45),
+0 0 45px rgba(255,255,255,.10);
+}
+
+100%{
+text-shadow:
+0 0 10px rgba(255,0,0,.20),
+0 0 25px rgba(255,255,255,.05);
+}
+
+}
+
+@keyframes borderFlow{
+
+0%{
+box-shadow:
+0 0 8px rgba(255,0,0,.08);
+}
+
+50%{
+box-shadow:
+0 0 18px rgba(255,0,0,.25),
+0 0 40px rgba(255,255,255,.04);
+}
+
+100%{
+box-shadow:
+0 0 8px rgba(255,0,0,.08);
+}
+
+}
+
+@keyframes shine{
+
+0%{
+left:-130%;
+}
+
+100%{
+left:180%;
+}
+
+}
+
+@keyframes floatBox{
+
+0%{
+transform:translateX(0px);
+}
+
+50%{
+transform:translateX(2px);
+}
+
+100%{
+transform:translateX(0px);
+}
+
+}
+
+@keyframes goldSweep{
+
+0%{
+left:-120%;
+}
+
+100%{
+left:180%;
+}
+
+}
+
+/* =========================================================
+TITLE
+========================================================= */
+
+.title{
+
+position:absolute;
+
+top:15px;
+left:50%;
+
+transform:translateX(-50%);
+
+text-align:center;
+
+z-index:100;
+
+}
+
+.title h1{
+
+font-size:4.5rem;
+
+line-height:.88;
+
+font-weight:900;
+
+text-transform:uppercase;
+
+color:#ffffff;
+
+letter-spacing:2px;
+
+animation:titleGlow 5s ease-in-out infinite;
+
+}
+
+.title h2{
+
+font-size:1.5rem;
+
+margin-top:10px;
+
+font-weight:900;
+
+letter-spacing:6px;
+
+color:#ff0000;
+
+text-shadow:
+0 0 15px rgba(255,0,0,.35);
+
+animation:titleGlow 4s ease-in-out infinite;
+
+}
+
+/* =========================================================
+ROUND LABELS
+========================================================= */
+
+.round{
+
+position:absolute;
+
+font-size:1rem;
+
+font-weight:900;
+
+letter-spacing:3px;
+
+color:#ff0000;
+
+text-transform:uppercase;
+
+opacity:.95;
+
+text-shadow:
+0 0 12px rgba(255,0,0,.30);
+
+}
+
+/* =========================================================
+CENTER TITLES
+========================================================= */
+
+.centerTitle{
+
+position:absolute;
+
+left:50%;
+
+transform:translateX(-50%);
+
+font-size:1.5rem;
+
+font-weight:900;
+
+letter-spacing:4px;
+
+color:white;
+
+text-shadow:
+0 0 20px rgba(255,0,0,.35);
+
+z-index:50;
+
+animation:titleGlow 5s ease-in-out infinite;
+
+}
+
+/* =========================================================
+MATCH
+========================================================= */
+
+.match{
+
+position:absolute;
+
+display:flex;
+
+flex-direction:column;
+
+gap:4px;
+
+}
+
+/* =========================================================
+DRIVER
+========================================================= */
+
+.driver{
+
+width:180px;
+height:32px;
+
+display:flex;
+
+align-items:center;
+
+background:
+
+linear-gradient(
+90deg,
+rgba(8,8,8,.96) 0%,
+rgba(28,28,28,.96) 45%,
+rgba(0,0,0,.96) 100%
+);
+
+border-top:1px solid rgba(255,255,255,.10);
+border-right:1px solid rgba(255,255,255,.10);
+border-bottom:1px solid rgba(255,255,255,.10);
+
+border-left:3px solid #ff0000;
+
+overflow:hidden;
+
+backdrop-filter:blur(6px);
+
+position:relative;
+
+animation:
+borderFlow 4s ease-in-out infinite,
+floatBox 6s ease-in-out infinite;
+
+}
+
+.driver::before{
+
+content:'';
+
+position:absolute;
+
+inset:0;
+
+background:
+
+linear-gradient(
+180deg,
+rgba(255,255,255,.04),
+transparent 50%
+);
+
+pointer-events:none;
+
+}
+
+.driver::after{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:-130%;
+
+width:55%;
+height:100%;
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.55),
+transparent
+);
+
+transform:skewX(-22deg);
+
+animation:shine 3.2s linear infinite;
+
+}
+
+/* =========================================================
+QUALIFY GOLD
+========================================================= */
+
+.qualify{
+
+width:30px;
+height:100%;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+background:
+
+linear-gradient(
+180deg,
+#fff6b7 0%,
+#ffd700 18%,
+#ffbf00 40%,
+#a86f00 65%,
+#fff1a8 85%,
+#c99700 100%
+);
+
+color:#000000;
+
+font-size:.68rem;
+
+font-weight:900;
+
+letter-spacing:1px;
+
+text-shadow:
+0 1px 2px rgba(255,255,255,.45);
+
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.65),
+inset 0 -2px 4px rgba(0,0,0,.35),
+0 0 10px rgba(255,215,0,.35);
+
+position:relative;
+
+overflow:hidden;
+
+z-index:2;
+
+}
+
+.qualify::before{
+
+content:'';
+
+position:absolute;
+
+top:-40%;
+left:-120%;
+
+width:70%;
+height:180%;
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.65),
+transparent
+);
+
+transform:rotate(18deg);
+
+animation:goldSweep 3s linear infinite;
+
+}
+
+/* =========================================================
+NUMBER
+========================================================= */
+
+.number{
+
+width:50px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+font-size:.72rem;
+
+font-weight:900;
+
+color:#ffffff;
+
+background:rgba(255,255,255,.03);
+
+border-left:1px solid rgba(255,255,255,.05);
+border-right:1px solid rgba(255,255,255,.05);
+
+text-shadow:
+0 0 8px rgba(255,255,255,.18);
+
+z-index:2;
+
+}
+
+/* =========================================================
+NAME
+========================================================= */
+
+.name{
+
+flex:1;
+
+padding-left:8px;
+
+font-size:.72rem;
+
+font-weight:800;
+
+letter-spacing:.7px;
+
+white-space:nowrap;
+
+color:#ffffff;
+
+position:relative;
+
+z-index:2;
+
+text-shadow:
+0 0 8px rgba(255,255,255,.12);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="title">
+<h1>DRIFT NATIONAL<br>SERIES</h1>
+<h2>TOP 32 PRO</h2>
+</div>
+
+<div class="round" style="left:35px;top:150px;">TOP 32</div>
+<div class="round" style="left:275px;top:150px;">TOP 16</div>
+<div class="round" style="left:495px;top:150px;">TOP 8</div>
+<div class="round" style="left:710px;top:150px;">TOP 4</div>
+
+<div class="round" style="right:710px;top:150px;">TOP 4</div>
+<div class="round" style="right:495px;top:150px;">TOP 8</div>
+<div class="round" style="right:275px;top:150px;">TOP 16</div>
+<div class="round" style="right:35px;top:150px;">TOP 32</div>
+
+<div class="centerTitle" style="top:185px;">
+FINAL
+</div>
+
+<div class="centerTitle" style="top:520px;">
+3RD PLACE BATTLE
+</div>
+
+<div class="centerTitle" style="top:700px;">
+CLASSIFICA
+</div>
+
+<div id="bracket"></div>
+
+<script>
+
+/* =========================================================
+CSV URL
+========================================================= */
+
+const csvUrl =
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vRfGydE2Pe8jwdQJ6V0ucfb6dUvq_-YpzWAmIM4iBJ7nh_qM7UFqx8yZWDz_zX0s10104pnSPdgKf62/pub?output=csv&gid=523030039';
+
+/* =========================================================
+CSV PARSER
+========================================================= */
+
+function parseCSVLine(line){
+
+const result=[];
+let current='';
+let insideQuotes=false;
+
+for(let i=0;i<line.length;i++){
+
+const char=line[i];
+
+if(char === '"'){
+insideQuotes=!insideQuotes;
+}
+else if(char === ',' && !insideQuotes){
+result.push(current.trim());
+current='';
+}
+else{
+current += char;
+}
+
+}
+
+result.push(current.trim());
+
+return result;
+
+}
+
+/* =========================================================
+DRIVER
+========================================================= */
+
+function driver(q,n,name){
+
+return `
+
+<div class="driver">
+
+<div class="qualify">
+${q || ''}
+</div>
+
+<div class="number">
+#${n || ''}
+</div>
+
+<div class="name">
+${name || 'N/A'}
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+MATCH
+========================================================= */
+
+function match(x,y,a1,b1,c1,a2,b2,c2){
+
+return `
+
+<div class="match"
+style="
+left:${x}px;
+top:${y}px;
+">
+
+${driver(a1,b1,c1)}
+${driver(a2,b2,c2)}
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+LOAD BRACKET
+========================================================= */
+
+async function loadBracket(){
+
+try{
+
+const response =
+await fetch(
+csvUrl + '&nocache=' + Date.now(),
+{
+cache:'no-store'
+}
+);
+
+const csv =
+await response.text();
+
+const rows =
+csv
+.split('\n')
+.map(r=>parseCSVLine(r));
+
+let html='';
+
+const top32Y=[
+180,255,330,405,
+480,555,630,705
+];
+
+/* TOP32 LEFT */
+
+for(let i=0;i<8;i++){
+
+const r1=5+(i*3);
+const r2=6+(i*3);
+
+html += match(
+20,
+top32Y[i],
+
+rows[r1]?.[0],
+rows[r1]?.[1],
+rows[r1]?.[2],
+
+rows[r2]?.[0],
+rows[r2]?.[1],
+rows[r2]?.[2]
+);
+
+}
+
+/* TOP16 LEFT */
+
+html += match(250,215,'',rows[7]?.[5],rows[7]?.[6],'',rows[8]?.[5],rows[8]?.[6]);
+
+html += match(250,355,'',rows[13]?.[5],rows[13]?.[6],'',rows[14]?.[5],rows[14]?.[6]);
+
+html += match(250,495,'',rows[19]?.[5],rows[19]?.[6],'',rows[20]?.[5],rows[20]?.[6]);
+
+html += match(250,635,'',rows[25]?.[5],rows[25]?.[6],'',rows[26]?.[5],rows[26]?.[6]);
+
+/* TOP8 LEFT */
+
+html += match(480,285,'',rows[11]?.[9],rows[11]?.[10],'',rows[12]?.[9],rows[12]?.[10]);
+
+html += match(480,565,'',rows[23]?.[9],rows[23]?.[10],'',rows[24]?.[9],rows[24]?.[10]);
+
+/* TOP4 LEFT */
+
+html += match(
+690,
+405,
+
+'',rows[17]?.[13],rows[17]?.[14],
+'',rows[18]?.[13],rows[18]?.[14]
+);
+
+/* FINAL */
+
+html += match(
+860,
+250,
+
+'',rows[17]?.[19],rows[17]?.[18],
+'',rows[17]?.[21],rows[17]?.[20]
+);
+
+/* TOP4 RIGHT */
+
+html += match(
+1030,
+405,
+
+'',rows[17]?.[21],rows[17]?.[22],
+'',rows[18]?.[21],rows[18]?.[22]
+);
+
+/* TOP8 RIGHT */
+
+html += match(1240,285,'',rows[11]?.[25],rows[11]?.[26],'',rows[12]?.[25],rows[12]?.[26]);
+
+html += match(1240,565,'',rows[23]?.[25],rows[23]?.[26],'',rows[24]?.[25],rows[24]?.[26]);
+
+/* TOP16 RIGHT */
+
+html += match(1460,215,'',rows[7]?.[29],rows[7]?.[30],'',rows[8]?.[29],rows[8]?.[30]);
+
+html += match(1460,355,'',rows[13]?.[29],rows[13]?.[30],'',rows[14]?.[29],rows[14]?.[30]);
+
+html += match(1460,495,'',rows[19]?.[29],rows[19]?.[30],'',rows[20]?.[29],rows[20]?.[30]);
+
+html += match(1460,635,'',rows[25]?.[29],rows[25]?.[30],'',rows[26]?.[29],rows[26]?.[30]);
+
+/* TOP32 RIGHT */
+
+for(let i=0;i<8;i++){
+
+const r1=5+(i*3);
+const r2=6+(i*3);
+
+html += match(
+1680,
+top32Y[i],
+
+rows[r1]?.[35],
+rows[r1]?.[33],
+rows[r1]?.[34],
+
+rows[r2]?.[35],
+rows[r2]?.[33],
+rows[r2]?.[34]
+);
+
+}
+
+/* 3RD PLACE */
+
+html += match(
+860,
+585,
+
+'',
+rows[10]?.[17],
+rows[10]?.[18],
+
+'',
+rows[11]?.[17],
+rows[11]?.[18]
+);
+
+/* CLASSIFICA */
+
+html += match(
+860,
+760,
+
+'1',
+rows[24]?.[17],
+rows[24]?.[18],
+
+'2',
+rows[25]?.[17],
+rows[25]?.[18]
+);
+
+html += match(
+860,
+835,
+
+'3',
+rows[26]?.[17],
+rows[26]?.[18],
+
+'4',
+rows[27]?.[17],
+rows[27]?.[18]
+);
+
+/* UPDATE HTML */
+
+document.getElementById('bracket').innerHTML = html;
+
+console.log(
+'Bracket Updated:',
+new Date().toLocaleTimeString()
+);
+
+}
+catch(err){
+
+console.log(
+'Update Error:',
+err
+);
+
+}
+
+}
+
+/* =========================================================
+START REALTIME
+========================================================= */
+
+loadBracket();
+
+setInterval(async()=>{
+
+await loadBracket();
+
+},50000);
+
+</script>
+
+</body>
+</html>
